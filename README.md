@@ -1,1 +1,3 @@
-"# lng-diary" 
+# Language Diary
+
+React native + express backend
