@@ -40,9 +40,9 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         };
     }
 
-    await createUser(email, password);
-
     try {
+        await createUser(email, password);
+
         return {
             statusCode: 201,
             body: JSON.stringify({
