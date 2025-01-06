@@ -9,3 +9,13 @@ services:
       - POSTGRES_PASSWORD=test-pass
       - POSTGRES_USER=user
       - POSTGRES_DB=db
+  test-db:
+    image: postgres:15-alpine
+    ports:
+      - 5433:5432
+    volumes:
+      - ~/apps/postgres-test:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=test-pass
+      - POSTGRES_USER=test-user
+      - POSTGRES_DB=test-db

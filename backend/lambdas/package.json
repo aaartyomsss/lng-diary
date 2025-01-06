@@ -7,10 +7,12 @@
     "author": "SAM CLI",
     "license": "MIT",
     "scripts": {
-        "unit": "jest",
+        "unit": "jest tests/unit",
         "lint": "eslint '*.ts' --quiet --fix",
         "compile": "tsc",
-        "test": "npm run compile && npm run unit"
+        "test": "npm run compile && npm run unit",
+        "migrate-integration": "dotenv -e .env.test npx prisma migrate dev",
+        "integration": "jest tests/integration"
     },
     "dependencies": {
         "@prisma/client": "^6.1.0",
