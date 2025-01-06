@@ -11,8 +11,7 @@
     "lint": "eslint '*.ts' --quiet --fix",
     "compile": "tsc",
     "test": "npm run compile && npm run unit",
-    "migrate-integration": "dotenv -e .env.test npx prisma migrate dev",
-    "integration": "jest tests/integration"
+    "migrate-integration": "dotenv -e .env.test npx prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
