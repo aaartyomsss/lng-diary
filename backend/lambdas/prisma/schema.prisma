@@ -17,4 +17,17 @@ model User {
   id Int @id @default(autoincrement())
   email String @unique @db.VarChar(128)
   passwordHash String @db.VarChar(2048) @map("password_hash")
+  flashcards Flashcard[]
+
+  @@map("user")
+}
+
+model Flashcard {
+  id Int @id @default(autoincrement())
+  targetLanguageTranslation String @map("target_language_translation") @db.VarChar(128)
+  firstLanguageTranslation String @map("first_language_translation") @db.VarChar(128)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int @map("user_id")
+
+  @@map("flashcard")
 }
