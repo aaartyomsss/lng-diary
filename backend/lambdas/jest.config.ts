@@ -12,4 +12,8 @@ export default {
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   testMatch: ['**/tests/unit/**/*.test.ts', '**/tests/integration/*.test.ts'],
+  preset: 'ts-jest',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
 };
