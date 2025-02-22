@@ -13,17 +13,17 @@ beforeEach(() => {
 
 describe('JWT Auth', function () {
   it('Token is created', () => {
-    const token = generateJwt('uuid');
+    const token = generateJwt(1);
     const parts = token.split('.');
     expect(parts.length).toBe(3);
   });
 
   it('Token can be verified', () => {
-    const token = generateJwt('uuid-v4-test');
+    const token = generateJwt(2);
     const decoded = decodeJwt(token);
 
     expect(decoded).toBeDefined();
-    expect(decoded?.userId).toBe('uuid-v4-test');
+    expect(decoded?.userId).toBe(2);
   });
 });
 

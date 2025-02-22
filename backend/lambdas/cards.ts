@@ -1,4 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { extractUserFromEvent } from './utils/userExtractor';
+import { PrismaClient } from '@prisma/client';
 
 /**
  *
@@ -11,19 +13,40 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
  */
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  const user = extractUserFromEvent(event);
+
+  if (!user) {
+    return {
+      statusCode: 403,
+      body: JSON.stringify({
+        message: 'Unauthenticated',
+      }),
+    };
+  }
+
+  const prisma = new PrismaClient();
+
+  const userFlashcards = await prisma.flashcard.findMany({
+    where: {
+      user: user.id,
+    },
+    select: {
+      firstLanguageTranslation: true,
+      targetLanguageTranslation: true,
+    },
+  });
+
   try {
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        cards: [{ target_language: 'Mi amore', native_language: 'My love' }],
-      }),
+      body: JSON.stringify(userFlashcards),
     };
   } catch (err) {
     console.log(err);
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: 'some error happened',
+        message: 'Error happened',
       }),
     };
   }

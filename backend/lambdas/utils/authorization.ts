@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const generateJwt = (userId: string) => {
+export const generateJwt = (userId: number) => {
   const secret = process.env.JWT_SECRET;
   if (!secret) throw new Error('Invalid configuration');
 

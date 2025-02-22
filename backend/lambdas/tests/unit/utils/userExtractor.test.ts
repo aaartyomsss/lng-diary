@@ -29,12 +29,12 @@ describe('userExtractor', () => {
   });
 
   it('Returns user, if everything is on point', () => {
-    const token = generateJwt('id_of_user');
+    const token = generateJwt(1);
     const event = mockApiEventFactory({ method: 'get', path: '/test', authHeader: token });
     const user = extractUserFromEvent(event);
 
     expect(user).toBeDefined();
-    expect(user?.userId).toBe('id_of_user');
+    expect(user?.userId).toBe(1);
   });
 });
 
