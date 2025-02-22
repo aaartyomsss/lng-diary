@@ -28,7 +28,7 @@ describe('card lambda handler', () => {
       },
     });
 
-    const flashcards = await prisma.flashcard.createMany({
+    await prisma.flashcard.createMany({
       data: [
         {
           targetLanguageTranslation: 'Mina',
