@@ -1,6 +1,5 @@
 # Language Diary
-
-React native + express backend
+Lambda + API Gateway backend. Frontend will be build with react native and react.
 
 ## Set up
 
