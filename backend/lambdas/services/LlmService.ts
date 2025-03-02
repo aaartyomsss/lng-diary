@@ -35,6 +35,10 @@ export class LlmServcice {
       model: 'gpt-4o-mini',
     });
 
-    return chat;
+    if (chat.choices.length !== 1) {
+      throw new Error('Malformed LLM response');
+    }
+
+    return chat.choices[0].message.content;
   }
 }
