@@ -41,4 +41,16 @@ export class LlmServcice {
 
     return chat.choices[0].message.content;
   }
+
+  static parseModelResponse(input: string) {
+    const matcher = /Corrected text: (.+?) \| JSON with translations: (\{.+\})/;
+    const res = input.match(matcher);
+
+    if (!res || !res.length) {
+      throw new Error('Malformed Regex match');
+    }
+
+    const [_, text, transaltions] = res;
+    return { text, transaltions };
+  }
 }

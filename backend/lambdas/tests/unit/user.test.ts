@@ -117,7 +117,11 @@ describe('Unit test for user creation', function () {
     );
 
     const prisma = new PrismaClient();
-    const user = await prisma.user.findFirst();
+    const user = await prisma.user.findFirst({
+      where: {
+        email: 'user@gmail.com',
+      },
+    });
     expect(user).toBeDefined();
     expect(user?.email).toBe('user@gmail.com');
   });
